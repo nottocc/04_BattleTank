@@ -1,4 +1,4 @@
-# 04_BattleTank
+﻿# 04_BattleTank
 Open-world head-to-head tank fight with simple AI terrain and advanced control systems in UE4
 
 # Unreal Engine Developer Course - Section 4 - Building Escape
@@ -10,5 +10,6 @@ You're welcome to download, fork or do whatever else legal with all the files! T
 ## Lecture List
 +BT01 Intro, Notes & Section 4 Assets 
 +BT02 Game Design Document
++BT03 Setting up a GitHub "Repo"
 
 
