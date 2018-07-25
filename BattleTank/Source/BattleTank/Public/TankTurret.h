@@ -6,6 +6,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "TankTurret.generated.h"
 
+class UTankBarrel;
 /**
  * 
  */
@@ -15,14 +16,12 @@ class BATTLETANK_API UTankTurret : public UStaticMeshComponent
 	GENERATED_BODY()
 	
 public:
-	// -1 is max downward speed, +1 is max up movement
-	void Elevate(float RelativeSpeed);
+	// 1 max, -1 min
+	void Rotate(float RelativeSpeed);
 
 private:
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaxDegreesPerSecond = 25; //TODO play test
-	
-	
+		float MaxDegreesPerSecond = 25; 
 };
 
 
