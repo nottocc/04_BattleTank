@@ -11,11 +11,21 @@ void UTankMovementComponent::Initialize(UTankTrack* LeftTrackToSet, UTankTrack* 
 	RightTrack = RightTrackToSet;
 }
 
+void UTankMovementComponent::RequestDirectMove(const FVector & MoveVelocity, bool bForceMaxSpeed)
+{
+	// no need to call Super as we're replacing the functionality
+
+	auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
+	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
+	auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
+	
+	IntendMoveForward(ForwardThrow);
+}
 
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
 	//if (LeftTrack|| RightTrack) { return; }
-	UE_LOG(LogTemp, Warning, TEXT("Intend move forward throw: %f"), Throw)
+	//UE_LOG(LogTemp, Warning, TEXT("Intend move forward throw: %f"), Throw)
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
 	// TODO remove double speed from multiple inputs
@@ -24,7 +34,7 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 void UTankMovementComponent::IntendMoveBackward(float Throw)
 {
 	//if (LeftTrack || RightTrack) { return; }
-	UE_LOG(LogTemp, Warning, TEXT("Intend move backward throw: %f"), Throw)
+	//UE_LOG(LogTemp, Warning, TEXT("Intend move backward throw: %f"), Throw)
 	LeftTrack->SetThrottle(-Throw);
 	RightTrack->SetThrottle(-Throw);
 	// TODO remove double speed from multiple inputs
@@ -33,16 +43,17 @@ void UTankMovementComponent::IntendMoveBackward(float Throw)
 void UTankMovementComponent::IntendTurnLeft(float Throw)
 {
 	//if (LeftTrack || RightTrack) { return; }
-	UE_LOG(LogTemp, Warning, TEXT("Intend turn left throw: %f"), Throw)
+	//UE_LOG(LogTemp, Warning, TEXT("Intend turn left throw: %f"), Throw)
 	LeftTrack->SetThrottle(-Throw);
 	RightTrack->SetThrottle(Throw);
 	// TODO remove double speed from multiple inputs
 }
 
+
 void UTankMovementComponent::IntendTurnRight(float Throw)
 {
 	//if (LeftTrack || RightTrack) { return; }
-	UE_LOG(LogTemp, Warning, TEXT("Intend turn right throw: %f"), Throw)
+	//UE_LOG(LogTemp, Warning, TEXT("Intend turn right throw: %f"), Throw)
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(-Throw);
 	// TODO remove double speed from multiple inputs
