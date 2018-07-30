@@ -6,6 +6,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "TankTrack.generated.h"
 
+class UTankMovementComponent;
 /**
  * TankTrack is used to set maximum driving force and to apply forces to the tank
  */
@@ -21,4 +22,6 @@ public:
 	// Max force per track, in Newtons
 	UPROPERTY(EditDefaultsOnly)
 	float TrackMaxDrivingForce = 400000; // Assume 40 ton tank and 1g acceleration
+
+
 };
