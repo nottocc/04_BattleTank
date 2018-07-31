@@ -18,19 +18,19 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 
 	auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
 	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
-	auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
 
+	auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
 	IntendMoveForward(ForwardThrow);
 
-	//auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal().ToString();
-	//auto AIForwardIntention = MoveVelocity.GetSafeNormal().ToString();
-	//UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *TankForward, *AIForwardIntention)
+	auto RightThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
+	IntendTurnRight(RightThrow);
+
+	//UE_LOG(LogTemp, Warning, TEXT("Right: %f, Forward: %f"), RightThrow, ForwardThrow)
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
 	if (!LeftTrack|| !RightTrack) { return; }
-	UE_LOG(LogTemp, Warning, TEXT("Intend move forward throw: %f"), Throw)
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
 	// TODO remove double speed from multiple inputs
