@@ -23,7 +23,8 @@ void UTankAimingComponent::InitializeAim(UTankBarrel* BarrelToSet, UTankTurret* 
 	Turret = TurretToSet;
 }
 
-void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
+
+void UTankAimingComponent::AimAt(FVector HitLocation)
 {
 	if (!ensure(Barrel)) { return; }
 	//this->
@@ -46,12 +47,13 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	{
 			auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 			MoveBarrelTowards(AimDirection);
-			auto Time = GetWorld()->GetTimeSeconds();
+			AimAt(HitLocation);
 			
 	} 
 
 	// if no solution found do nothing
 }
+
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
@@ -66,5 +68,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	Barrel->Elevate(DeltaRotator.Pitch); 
 	Turret->Rotate(DeltaRotator.Yaw);
 }
+
+
 
 
